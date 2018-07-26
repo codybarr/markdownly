@@ -48,7 +48,7 @@ export default {
             snipId: this.$route.params.id,
             snip: {},
             url: window.location.href,
-            showMarkdown: false
+            showMarkdown: true
         }
     },
     methods: {
