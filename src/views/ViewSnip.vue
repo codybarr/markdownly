@@ -1,27 +1,39 @@
 <template>
     <section class="section">
         <div class="container">
-            <div class="field has-addons">
-                <div class="control">
-                    <input id="permalink"
-                        class="input"
-                        type="text"
-                        :value="url" 
-                        readonly>
+            <div class="field columns">
+                <div class="control column">
+                    <div class="field has-addons">
+                        <div class="control is-expanded">
+                            <input id="permalink" class="input" type="text" :value="url" readonly>
+                        </div>
+                        <div class="control">
+                            <a class="button is-info" @click="copy">
+                            <span class="icon">
+                                <i class="far fa-copy"></i>
+                            </span>
+                        </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="control">
-                    <a class="button is-info" @click="copy">
-                        <span class="icon">
-                            <i class="far fa-copy"></i>
-                        </span>
-                    </a>
+                <div class="control column has-text-right">
+                    <div class="field">
+                        <b-switch v-model="showMarkdown" type="is-info">
+                            Show Markdown
+                        </b-switch>
+                    </div>
                 </div>
             </div>
-            <div class="content" v-html="body"></div>
+            <div v-if="showMarkdown" class="content" v-html="body"></div>
+            <div v-else>
+                <textarea :value="body"
+                  class="textarea is-expanded monospace"
+                  rows="20"
+                  readonly></textarea>
+            </div>
         </div>
     </section>
 </template>
-
 <script>
 import marked from 'marked'
 import { db } from '@/initFirebase'
@@ -35,7 +47,8 @@ export default {
         return {
             snipId: this.$route.params.id,
             snip: {},
-            url: window.location.href
+            url: window.location.href,
+            showMarkdown: false
         }
     },
     methods: {
@@ -53,13 +66,14 @@ export default {
     },
     computed: {
         // title() { return this.snip.title },
-        body() { 
+        body() {
             if (this.snip && this.snip.body) {
-                // let snipBodyWithBreaks = this.snip.body.split('\n').join('<br/>')
-                return marked(this.snip.body, { sanitize: true, breaks: true })
-            } else {
-                return ''
+                if (this.showMarkdown) {
+                    return marked(this.snip.body, { sanitize: true, breaks: true })
+                }
+                return this.snip.body
             }
+            return ''
         }
     },
     firestore() {
@@ -69,4 +83,5 @@ export default {
         }
     }
 }
+
 </script>

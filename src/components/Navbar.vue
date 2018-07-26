@@ -2,7 +2,6 @@
     <nav class="navbar is-white is-fixed-top" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <router-link class="navbar-item" to="/">
-                <!-- <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28"> -->
                 <img src="@/assets/markdown100.png">
                 <span class="navbar-item">Markdown.ly</span>
             </router-link>
@@ -15,7 +14,7 @@
                 <span></span>
             </div>
         </div>
-        
+
         <div id="mobileNav" :class="['navbar-menu', { 'is-active': mobileNavActive }]">
             <div class="navbar-start">
                 <router-link to="/snips"

@@ -11,6 +11,7 @@
   "dependencies": {
     "buefy": "^0.6.6",
     "firebase": "^5.3.0",
+    "lodash": "^4.17.10",
     "marked": "^0.4.0",
     "moment": "^2.22.2",
     "vue": "^2.5.16",
@@ -23,7 +24,7 @@
     "@vue/cli-plugin-e2e-cypress": "^3.0.0-rc.5",
     "@vue/cli-plugin-eslint": "^3.0.0-rc.5",
     "@vue/cli-service": "^3.0.0-rc.5",
-    "@vue/eslint-config-prettier": "^3.0.0-rc.5",
+    "@vue/eslint-config-airbnb": "^3.0.0-rc.5",
     "lint-staged": "^7.2.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",

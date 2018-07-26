@@ -9,9 +9,10 @@ import '@/initFirebase'
 
 import Buefy from 'buefy'
 import 'buefy/lib/buefy.css'
-Vue.use(Buefy)
 
 import '@/filters/date.filter'
+
+Vue.use(Buefy)
 
 Vue.config.productionTip = false
 

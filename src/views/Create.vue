@@ -7,8 +7,8 @@
                     <form>
                         <div class="field">
                             <div :class="['control', { 'is-loading': loading }]">
-                                <textarea id="editor"
-                                    class="textarea"
+                                <textarea
+                                    class="textarea monospace"
                                     placeholder="Enter snip text! (hint: use markdown)"
                                     @input="update">
                                 </textarea>
@@ -16,8 +16,8 @@
                         </div>
                         <div class="field level">
                             <div class="control level-left">
-                                <button type="submit" 
-                                    @click.prevent="addSnip(body)"
+                                <button type="submit"
+                                    @click.prevent="addSnip(body, isPublic)"
                                     :disabled="!formValid"
                                     class="button is-info">Create Snip</button>
                             </div>
@@ -68,11 +68,13 @@ export default {
         }
     },
     methods: {
-        addSnip(body) { // <-- and here 
+        addSnip(body, isPublic) {
+            // <-- and here
             const createdAt = new Date()
-            db.collection('snips').add({ body, createdAt })
-                .then(ref => {
-                    this.$router.push({ name: 'snip', params: { id: ref.id }})
+            db.collection('snips')
+                .add({ body, isPublic, createdAt })
+                .then((ref) => {
+                    this.$router.push({ name: 'snip', params: { id: ref.id } })
 
                     this.$snackbar.open({
                         duration: 5000,
@@ -94,11 +96,8 @@ export default {
         }
     }
 }
-
 </script>
 
 <style lang="scss">
-    #editor {
-        font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
-    }
+
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <Navbar />
-        <router-view/>
+        <router-view />
     </div>
 </template>
 
@@ -17,13 +17,19 @@ export default {
 </script>
 
 <style lang="scss">
-    .truncate {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    
-    .hero.is-fullheight.has-fixed-navbar {
-        min-height: calc(100vh - 3.25rem)
-    }
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.monospace {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
+    monospace;
+}
+
+.hero.is-fullheight.has-fixed-navbar {
+  min-height: calc(100vh - 3.25rem);
+}
 </style>

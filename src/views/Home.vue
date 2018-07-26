@@ -17,7 +17,7 @@
 
 <script>
 // @ is an alias to /src
-import Navbar from "@/components/Navbar.vue"
+import Navbar from '@/components/Navbar.vue'
 
 export default {
     name: 'home',
@@ -28,6 +28,4 @@ export default {
 </script>
 
 <style lang="scss">
-
 </style>
-

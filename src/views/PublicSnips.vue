@@ -2,7 +2,8 @@
     <section class="section">
         <div class="container">
             <h1 class="title">Public Snips</h1>
-            <div class="columns is-multiline">
+            <p v-if="!snips.length">Sorry, no public snips yet</p>
+            <div v-else class="columns is-multiline">
                 <div class="column is-one-quarter" v-if="snips" v-for="snip in snips">
                     <div class="card box is-paddingless">
                         <div class="card-content">
@@ -35,13 +36,16 @@ export default {
     },
     methods: {
         shortBody(str) {
-            return str.split('\n').slice(0, 6).join('<br>')
+            return str
+                .split('\n')
+                .slice(0, 6)
+                .join('<br>')
         }
     },
     firestore() {
         return {
             // snip: db.collection('locations').orderBy('createdAt')
-            snips: db.collection('snips').orderBy('createdAt', 'desc')
+            snips: db.collection('snips').where('isPublic', '==', true).orderBy('createdAt', 'desc')
         }
     }
 }

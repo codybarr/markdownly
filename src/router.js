@@ -11,7 +11,8 @@ import ViewSnip from '@/views/ViewSnip.vue'
 Vue.use(Router)
 
 export default new Router({
-    routes: [{
+    routes: [
+        {
             path: '/',
             name: 'home',
             component: Home
