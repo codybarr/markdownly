@@ -18,9 +18,30 @@
                 </div>
                 <div class="control column has-text-right">
                     <div class="field">
-                        <b-switch v-model="showMarkdown" type="is-info">
-                            Show Markdown
-                        </b-switch>
+                        <div class="level">
+                            <div class="level-item">
+                                <b-switch v-model="showMarkdown" type="is-info">
+                                    Formatted
+                                </b-switch>
+                            </div>
+                            <div v-if="snipOwner" class="level-item">
+                                <router-link :to="{ name: 'edit-snip', params: { id: snipId } }"
+                                    class="button is-link">
+                                    <span class="icon">
+                                        <i class="far fa-copy"></i>
+                                    </span>
+                                    <span>Edit Snip</span>
+                                </router-link>
+                            </div>
+                            <div v-if="snipOwner" class="level-item">
+                                <button class="button is-danger" @click.prevent="deleteSnip">
+                                    <span class="icon">
+                                        <i class="fas fa-trash"></i>
+                                    </span>
+                                    <span>Delete Snip</span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -37,6 +58,8 @@
 <script>
 import marked from 'marked'
 import { db } from '@/initFirebase'
+
+import { mapGetters } from 'vuex'
 
 import ClipboardMixin from '@/mixins/clipboard.mixin'
 
@@ -62,6 +85,26 @@ export default {
                 actionText: 'Sweet!',
                 queue: false
             })
+        },
+        deleteSnip() {
+            this.$dialog.confirm({
+                title: 'Deleting Snip',
+                message: 'Are you sure you want to <strong>delete</strong> this snip?',
+                confirmText: 'Delete',
+                type: 'is-danger',
+                hasIcon: true,
+                onConfirm: () => {
+                    db.collection('snips').doc(this.snipId).delete().then(() => {
+                        this.$router.push('/my-snips')
+                        this.$snackbar.open({
+                            duration: 5000,
+                            message: 'Snip deleted!',
+                            position: 'is-bottom',
+                            queue: false
+                        })
+                    })
+                }
+            })
         }
     },
     computed: {
@@ -74,7 +117,14 @@ export default {
                 return this.snip.body
             }
             return ''
-        }
+        },
+        snipOwner() {
+            return this.snip && this.loggedIn && this.snip.uid === this.user.uid
+        },
+        ...mapGetters([
+            'user',
+            'loggedIn'
+        ])
     },
     firestore() {
         return {

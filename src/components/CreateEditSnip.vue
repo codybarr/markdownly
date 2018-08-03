@@ -1,7 +1,7 @@
 <template>
     <section class="section">
         <div class="container is-fullhd">
-            <h1 class="title">Create New Snip</h1>
+            <h1 class="title">{{ createOrEdit }} Snip</h1>
             <div class="columns">
                 <div class="column">
                     <form>
@@ -10,16 +10,17 @@
                                 <textarea
                                     class="textarea monospace"
                                     placeholder="Enter snip text! (hint: use markdown)"
-                                    @input="update">
+                                    rows="15"
+                                    v-model="body"> <!-- @input="update"> -->
                                 </textarea>
                             </div>
                         </div>
                         <div class="field level">
                             <div class="control level-left">
                                 <button type="submit"
-                                    @click.prevent="addSnip(body, isPublic)"
+                                    @click.prevent="createOrUpdate"
                                     :disabled="!formValid"
-                                    class="button is-info">Create Snip</button>
+                                    class="button is-info">{{ createOrEdit }} Snip</button>
                             </div>
                             <div class="control level-right">
                                 <b-switch v-model="isPublic"
@@ -35,27 +36,31 @@
         </div>
     </section>
 </template>
+
 <script>
-import { db } from '@/initFirebase'
 import _ from 'lodash'
 import marked from 'marked'
 
-import ClipboardMixin from '@/mixins/clipboard.mixin'
-
 export default {
-    name: 'create',
-    mixins: [ClipboardMixin],
+    name: 'create-edit-snip',
+    props: ['editing', 'snip'],
     data() {
         return {
-            body: '',
-            isPublic: true,
+            body: this.snip.body,
+            isPublic: this.snip.isPublic,
             loading: false
         }
+    },
+    watch: {
+        'snip': 'setFormValues'
     },
     created() {
         this.debouncedUpdate = _.debounce(this.updateMarkdown, 300)
     },
     computed: {
+        createOrEdit() {
+            return this.editing == true ? 'Edit' : 'Create'
+        },
         formValid() {
             if (this.body !== '') {
                 return true
@@ -65,26 +70,19 @@ export default {
         },
         bodyMarkdown() {
             return marked(this.body, { sanitize: true, breaks: true })
-        }
+        },
     },
     methods: {
-        addSnip(body, isPublic) {
-            // <-- and here
-            const createdAt = new Date()
-            db.collection('snips')
-                .add({ body, isPublic, createdAt })
-                .then((ref) => {
-                    this.$router.push({ name: 'snip', params: { id: ref.id } })
-
-                    this.$snackbar.open({
-                        duration: 5000,
-                        message: 'Snip created!',
-                        type: 'is-success',
-                        position: 'is-top-right',
-                        actionText: 'OK',
-                        queue: false
-                    })
-                })
+        createOrUpdate() {
+            let snip = {
+                body: this.body,
+                isPublic: this.isPublic
+            }
+            this.$emit('submit', snip)
+        },
+        setFormValues() {
+            this.body = this.snip.body
+            this.isPublic = this.snip.isPublic
         },
         update(e) {
             this.loading = true
@@ -97,7 +95,3 @@ export default {
     }
 }
 </script>
-
-<style lang="scss">
-
-</style>
