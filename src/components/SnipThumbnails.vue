@@ -35,6 +35,6 @@ export default {
                 .slice(0, 6)
                 .join('<br>')
         }
-    },
+    }
 }
 </script>

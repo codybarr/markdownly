@@ -18,46 +18,46 @@ Vue.use(Router)
 
 const router = new Router({
     routes: [{
-            path: '/',
-            name: 'home',
-            component: Home
-        },
-        {
-            path: '/snips',
-            name: 'snips',
-            component: PublicSnips
-        },
-        {
-            path: '/about',
-            name: 'about',
-            component: About
-        },
-        {
-            path: '/create',
-            name: 'create-snip',
-            component: CreateSnip
-        },
-        {
-            path: '/snip/:id',
-            name: 'view-snip',
-            component: () => import('@/views/ViewSnip')
-        },
+        path: '/',
+        name: 'home',
+        component: Home
+    },
+    {
+        path: '/snips',
+        name: 'snips',
+        component: PublicSnips
+    },
+    {
+        path: '/about',
+        name: 'about',
+        component: About
+    },
+    {
+        path: '/create',
+        name: 'create-snip',
+        component: CreateSnip
+    },
+    {
+        path: '/snip/:id',
+        name: 'view-snip',
+        component: () => import('@/views/ViewSnip')
+    },
 
         // Auth
 
-        {
-            path: '/my-snips',
-            name: 'my-snips',
-            component: MySnips,
-            meta: {
-                requiresAuth: true
-            }
-        },
-        {
-            path: '/snip/:id/edit',
-            name: 'edit-snip',
-            component: EditSnip
+    {
+        path: '/my-snips',
+        name: 'my-snips',
+        component: MySnips,
+        meta: {
+            requiresAuth: true
         }
+    },
+    {
+        path: '/snip/:id/edit',
+        name: 'edit-snip',
+        component: EditSnip
+    }
     ]
 })
 

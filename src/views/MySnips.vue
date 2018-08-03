@@ -31,14 +31,14 @@ export default {
     },
     computed: {
         ...mapGetters([
-            'user',
+            'user'
         ])
     },
     firestore() {
         return {
             // snip: db.collection('locations').orderBy('createdAt')
             snips: db.collection('snips').where('uid', '==', this.user.uid)
-                        .orderBy('createdAt', 'desc')
+                .orderBy('createdAt', 'desc')
         }
     }
 }

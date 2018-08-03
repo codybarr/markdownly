@@ -35,7 +35,9 @@ export default {
             const uid = this.user.uid || null
             const { body, isPublic } = snip
             db.collection('snips')
-                .add({ body, isPublic, uid, createdAt })
+                .add({
+                    body, isPublic, uid, createdAt
+                })
                 .then((ref) => {
                     this.$router.push({ name: 'view-snip', params: { id: ref.id } })
 

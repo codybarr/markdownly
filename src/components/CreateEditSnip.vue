@@ -52,7 +52,7 @@ export default {
         }
     },
     watch: {
-        'snip': 'setFormValues'
+        snip: 'setFormValues'
     },
     created() {
         this.debouncedUpdate = _.debounce(this.updateMarkdown, 300)
@@ -70,11 +70,11 @@ export default {
         },
         bodyMarkdown() {
             return marked(this.body, { sanitize: true, breaks: true })
-        },
+        }
     },
     methods: {
         createOrUpdate() {
-            let snip = {
+            const snip = {
                 body: this.body,
                 isPublic: this.isPublic
             }

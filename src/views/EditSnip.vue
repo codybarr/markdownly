@@ -26,9 +26,9 @@ export default {
         }
     },
     beforeRouteEnter(to, from, next) {
-        db.collection('snips').doc(to.params.id).get().then(doc => {
+        db.collection('snips').doc(to.params.id).get().then((doc) => {
             if (doc.data().uid === store.getters.user.uid) {
-                next(vm => {
+                next((vm) => {
                     console.log('snip edit data', doc.data())
                     vm.snip = doc.data()
                 })
@@ -38,18 +38,18 @@ export default {
                     type: 'is-danger',
                     message: 'HEY! That\'s not your snip!'
                 })
-                next(vm => {
+                next((vm) => {
                     vm.$router.push('/')
                 })
             }
         })
     },
     watch: {
-        '$route': 'fetchData'
+        $route: 'fetchData'
     },
     methods: {
         fetchData() {
-            db.collection('snips').doc(to.params.id).get().then(doc => {
+            db.collection('snips').doc(to.params.id).get().then((doc) => {
                 this.snip = doc.data()
             })
         },
@@ -58,10 +58,10 @@ export default {
             const updatedAt = new Date()
             const { body, isPublic } = snip
 
-            let updatedSnip = { body, isPublic, updatedAt }
+            const updatedSnip = { body, isPublic, updatedAt }
             db.collection('snips').doc(this.snipId).set(updatedSnip, { merge: true })
                 .then(() => {
-                    this.$router.push({ name: 'view-snip', params: { id: this.$route.params.id }})
+                    this.$router.push({ name: 'view-snip', params: { id: this.$route.params.id } })
 
                     this.$snackbar.open({
                         duration: 5000,

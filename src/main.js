@@ -21,7 +21,7 @@ Vue.use(Buefy, {
 Vue.config.productionTip = false
 
 let app
-firebase.auth().onAuthStateChanged(function(user) {
+firebase.auth().onAuthStateChanged((user) => {
     if (!app) {
         /* eslint-disable no-new */
         app = new Vue({
