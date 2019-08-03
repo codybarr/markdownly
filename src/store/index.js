@@ -8,8 +8,8 @@ import notifications from './notifications.module'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-    modules: {
-        user,
-        notifications
-    }
+	modules: {
+		user,
+		notifications
+	}
 })

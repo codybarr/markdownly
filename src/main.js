@@ -15,29 +15,29 @@ import 'buefy/lib/buefy.css'
 import '@/filters/date.filter'
 
 Vue.use(Buefy, {
-    defaultIconPack: 'fas'
+	defaultIconPack: 'fas'
 })
 
 Vue.config.productionTip = false
 
 let app
-firebase.auth().onAuthStateChanged((user) => {
-    if (!app) {
-        /* eslint-disable no-new */
-        app = new Vue({
-            router,
-            store,
-            created() {
-                if (user) {
-                    store.commit(SET_USER, user)
-                } else {
-                    store.commit(LOADING_USER)
-                    store.commit(UNSET_USER)
-                }
-            },
-            render: h => h(App)
-        }).$mount('#app')
-    }
+firebase.auth().onAuthStateChanged(user => {
+	if (!app) {
+		/* eslint-disable no-new */
+		app = new Vue({
+			router,
+			store,
+			created() {
+				if (user) {
+					store.commit(SET_USER, user)
+				} else {
+					store.commit(LOADING_USER)
+					store.commit(UNSET_USER)
+				}
+			},
+			render: h => h(App)
+		}).$mount('#app')
+	}
 })
 
 // new Vue({
