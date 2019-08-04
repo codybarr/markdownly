@@ -10,7 +10,7 @@ import { FETCH_CARDS } from '@/store/actions.type'
 import { LOADING_USER, SET_USER, UNSET_USER } from '@/store/mutations.type'
 
 import Buefy from 'buefy'
-import 'buefy/lib/buefy.css'
+import 'buefy/dist/buefy.css'
 
 import '@/filters/date.filter'
 
