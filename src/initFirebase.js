@@ -1,11 +1,11 @@
 import Vue from 'vue'
-import VueFire from 'vuefire'
+import { firestorePlugin } from 'vuefire'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
 import 'firebase/storage'
 
-Vue.use(VueFire)
+Vue.use(firestorePlugin)
 
 firebase.initializeApp({
 	apiKey: 'AIzaSyBEP0eMeALsKe_46Gon7YF8AkANCfJNmCY',
@@ -17,5 +17,3 @@ firebase.initializeApp({
 })
 
 export const db = firebase.firestore()
-const settings = { timestampsInSnapshots: true }
-db.settings(settings)
