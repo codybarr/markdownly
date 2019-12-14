@@ -1,28 +1,19 @@
-# markdownly
+# Markdownly
 
-View demo site at: https://markdownly-20797.firebaseapp.com/#/
+Live App: https://markdownly.codybarr.dev
 
-## Project setup
-```
-yarn install
-```
+Simple pastebin-like web app with built-in markdown support. You can create anonymous public/private read-only "snips" or login with Google OAuth to manage / edit your personal snips.
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+# Screenshots
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+![Markdownly - Public Snips](/images/screenshot1.png?raw=true)
 
-### Lints and fixes files
-```
-yarn run lint
-```
+![Markdownly - Create Snip](/images/screenshot2.png?raw=true)
 
-### Run your end-to-end tests
-```
-yarn run test:e2e
-```
+![Markdownly - View Snip](/images/screenshot3.png?raw=true)
+
+# Technology Used
+
+-   Vue / Vuex
+-   [Firebase](https://firebase.google.com/) (Firestore / Auth)
+-   [Bulma](https://bulma.io/) / [Buefy](https://buefy.org/)
