@@ -14,6 +14,6 @@ Simple pastebin-like web app with built-in markdown support. You can create anon
 
 # Technology Used
 
--   Vue / Vuex
+-   [Vue](https://vuejs.org/) / [Vuex](https://vuex.vuejs.org/)
 -   [Firebase](https://firebase.google.com/) (Firestore / Auth)
 -   [Bulma](https://bulma.io/) / [Buefy](https://buefy.org/)
