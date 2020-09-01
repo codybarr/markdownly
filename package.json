@@ -10,7 +10,7 @@
 	},
 	"dependencies": {
 		"axios": "^0.18.0",
-		"buefy": "^0.6.6",
+		"buefy": "^0.7.2",
 		"firebase": "^5.3.0",
 		"lodash": "^4.17.10",
 		"marked": "^0.4.0",
